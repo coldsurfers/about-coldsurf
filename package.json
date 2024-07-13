@@ -1,12 +1,7 @@
 {
-  "name": "@coldsurfers/web-app",
+  "name": "@coldsurfers/about-coldsurf",
   "version": "1.0.0",
-  "private": true,
-  "workspaces": {
-    "nohoist": [
-      "**"
-    ]
-  },
+  "private": false,
   "scripts": {
     "build": "next build",
     "create:env:ci": "yarn ts-node ./libs/createDotEnv.ts",
