@@ -5,7 +5,6 @@ import { Noto_Sans as notoSans } from 'next/font/google'
 import { ReactNode } from 'react'
 import { cookies } from 'next/headers'
 import LayoutWrapper from '../components/LayoutWrapper'
-import { auth } from '../libs/auth'
 import StyledComponentsRegistry from '../registry/StyledComponentsRegistry'
 import StyleSheetRegistry from '../registry/StyleSheetRegistry'
 import { AuthStoreProvider } from '../registry/AuthStoreRegistry/AuthStoreRegistry'
@@ -23,7 +22,6 @@ export default async function RootLayout({
 }: {
   children: ReactNode
 }) {
-  const session = await auth()
   const accessToken = cookies().get(COOKIES.ACCESS_TOKEN)?.value
   const refreshToken = cookies().get(COOKIES.REFRESH_TOKEN)?.value
 
@@ -38,7 +36,7 @@ export default async function RootLayout({
             accessToken={accessToken}
             refreshToken={refreshToken}
           >
-            <LayoutWrapper session={session}>{children}</LayoutWrapper>
+            <LayoutWrapper>{children}</LayoutWrapper>
           </AuthStoreProvider>
         </RegistryProvider>
       </body>
