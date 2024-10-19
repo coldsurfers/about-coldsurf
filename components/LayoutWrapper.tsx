@@ -4,9 +4,10 @@ import { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { LoginModal } from './LoginModal'
-import { Header } from './Header/Header'
 import Footer from './Footer'
 import { useLoginModalStore } from '../stores/loginModalStore'
+import Header from '../features/layout/Header'
+import { HEADER_HEIGHT } from '../features/layout/Header.constants'
 
 const Container = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ const Container = styled.div`
 
 const ChildrenWrapper = styled.div`
   flex: 1;
+  padding-top: ${HEADER_HEIGHT};
 `
 
 export const queryClient = new QueryClient({})

@@ -11,7 +11,7 @@ const Container = styled.div`
 export default function Footer() {
   return (
     <Container>
-      <div>&copy; coldsurf</div>
+      <p style={{ fontWeight: 'bold' }}>&copy; COLDSURF</p>
     </Container>
   )
 }

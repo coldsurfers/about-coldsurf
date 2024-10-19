@@ -14,7 +14,7 @@ import { COOKIES } from '../libs/constants'
 const inter = notoSans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'ColdSurfers | HomePage',
+  title: '예정된 많은 공연을 놓치지 마세요 🎉 | COLDSURF',
 }
 
 export default async function RootLayout({
