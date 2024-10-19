@@ -74,29 +74,18 @@ const MobileMenuContainer = styled.div`
   }
 `
 
-const ModalContainer = styled.div`
+const ModalContainer = styled.div<{ $isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  /* background-color: red; */
-  display: flex;
+  display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
   z-index: 1000;
 `
-
-// const DimmedBackground = styled.div`
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   background-color: rgba(0, 0, 0, 0.5);
-//   z-index: 999; // Ensure it is below the modal
-// `
 
 const ModalPaper = styled.div`
   background: white;
@@ -106,12 +95,6 @@ const ModalPaper = styled.div`
   max-width: 400px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 `
-
-// const ModalHeader = styled.h2`
-//   margin: 0;
-//   font-size: 24px;
-//   font-weight: 600;
-// `
 
 const ModalContent = styled.div`
   margin: 10px 0;
@@ -129,27 +112,39 @@ export function ModalMenu({
   isOpen: boolean
   onClose: () => void
 }) {
-  if (!isOpen) return null
+  useEffect(() => {
+    const { body } = document
+    if (isOpen) {
+      body.style.overflow = 'hidden' // Disable scrolling
+    } else {
+      body.style.overflow = 'auto' // Reset overflow to enable scrolling
+    }
+    return () => {
+      body.style.overflow = 'auto' // Clean up on unmount
+    }
+  }, [isOpen])
 
   return (
-    <ModalContainer>
-      <ModalPaper>
-        {/* <ModalHeader>Menu</ModalHeader> */}
-        <ModalContent>
-          <Link href="/about" onClick={onClose}>
-            <p>About</p>
-          </Link>
-          <Link href="/blog" onClick={onClose}>
-            <p>Blog</p>
-          </Link>
-          <Link href={BILLETS_APP_URL} onClick={onClose}>
-            <Button text="Get Billets app" color="pink" />
-          </Link>
-        </ModalContent>
-        <ModalFooter>
-          <Button text="Close" color="transparent" onPress={onClose} />
-        </ModalFooter>
-      </ModalPaper>
+    <ModalContainer $isOpen={isOpen} style={{ overflowY: 'auto' }}>
+      {isOpen && (
+        <ModalPaper>
+          {/* <ModalHeader>Menu</ModalHeader> */}
+          <ModalContent>
+            <Link href="/about" onClick={onClose}>
+              <p>About</p>
+            </Link>
+            <Link href="/blog" onClick={onClose}>
+              <p>Blog</p>
+            </Link>
+            <Link href={BILLETS_APP_URL} onClick={onClose}>
+              <Button text="Get Billets app" color="pink" />
+            </Link>
+          </ModalContent>
+          <ModalFooter>
+            <Button text="Close" color="transparent" onPress={onClose} />
+          </ModalFooter>
+        </ModalPaper>
+      )}
     </ModalContainer>
   )
 }
@@ -163,10 +158,8 @@ export default function Header() {
       const currentScroll =
         window.pageYOffset || document.documentElement.scrollTop
       if (currentScroll > lastScrollTop) {
-        console.log('scrolling down')
         setAnimation('hide')
       } else {
-        console.log('scrolling up')
         setAnimation('show')
       }
       lastScrollTop = currentScroll <= 0 ? 0 : currentScroll // For Mobile or negative scrolling
