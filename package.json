@@ -1,7 +1,6 @@
 {
   "name": "@coldsurfers/about-coldsurf",
   "version": "1.0.0",
-  "private": false,
   "scripts": {
     "build": "next build",
     "create:env:ci": "yarn ts-node ./libs/createDotEnv.ts",
@@ -53,5 +52,6 @@
     "ts-node": "^10.9.2",
     "typescript": "5.3.3",
     "typescript-plugin-css-modules": "^5.0.2"
-  }
+  },
+  "packageManager": "yarn@3.6.4"
 }
