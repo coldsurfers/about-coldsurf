@@ -14,3 +14,8 @@ export const API_HOST =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
     : 'https://grungebank.coldsurf.io'
+
+export const API_BASE_URL =
+  process.env.NODE_ENV === 'development'
+    ? 'https://api.billets.coldsurf.io'
+    : 'https://api.billets.coldsurf.io'

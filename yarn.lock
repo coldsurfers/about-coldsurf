@@ -1079,7 +1079,7 @@ __metadata:
     "@coldsurfers/ocean-road": 1.5.1-rc.4
     "@react-oauth/google": ^0.12.1
     "@tanstack/eslint-plugin-query": ^5.12.1
-    "@tanstack/react-query": ^5.12.2
+    "@tanstack/react-query": ^5.59.15
     "@tosspayments/payment-widget-sdk": ^0.10.2
     "@types/node": ^20
     "@types/react": 18.2.55
@@ -1089,6 +1089,7 @@ __metadata:
     "@typescript-eslint/parser": ^5.53.0
     autoprefixer: ^10.4.17
     axios: ^1.6.2
+    date-fns: ^4.1.0
     eslint: ^7.32.0 || ^8.2.0
     eslint-config-airbnb-base: ^15.0.0
     eslint-config-coldsurfers: 1.2.0
@@ -1100,6 +1101,7 @@ __metadata:
     nanoid: ^5.0.4
     next: 14.1.0
     next-auth: beta
+    openapi-fetch: ^0.12.2
     postcss: ^8.4.35
     prettier: ^3.2.4
     prettier-plugin-tailwindcss: ^0.5.11
@@ -1774,21 +1776,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.51.1":
-  version: 5.51.1
-  resolution: "@tanstack/query-core@npm:5.51.1"
-  checksum: c75a8bf9d4e04adde01420d21e99222ad7e25912ea22ec18ce7e96a5a2111f457da06b18960469b6f79753296404657a717f4776a46c58e24652542e52e6b25f
+"@tanstack/query-core@npm:5.59.13":
+  version: 5.59.13
+  resolution: "@tanstack/query-core@npm:5.59.13"
+  checksum: 2f43f53ecd0151c9f83f822f47a8c882cce234ece2fa4fc575ae1bf865094ff145f5efe7cb9c750541df143804941248aceaf85e7c5346a7897d896845996dff
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.12.2":
-  version: 5.51.1
-  resolution: "@tanstack/react-query@npm:5.51.1"
+"@tanstack/react-query@npm:^5.59.15":
+  version: 5.59.15
+  resolution: "@tanstack/react-query@npm:5.59.15"
   dependencies:
-    "@tanstack/query-core": 5.51.1
+    "@tanstack/query-core": 5.59.13
   peerDependencies:
-    react: ^18.0.0
-  checksum: fbf5b69499ecba40ee31a354ede7c4932d43999a2184da43d5725f5f7688251f43ba131650aa2d2e44d18a1b768d37c9354e386ea7bdfeccb4ce52999ee4a5cc
+    react: ^18 || ^19
+  checksum: 465aa2cdfc83fe3ebbb3dfe94ad39ac9e047e6808890b9dfd253d7aec31cdc46198af3c3a8dfa6a7212f941db7df1fe9a724540504cc2e3efa1cdffcb2d48164
   languageName: node
   linkType: hard
 
@@ -3448,6 +3450,13 @@ __metadata:
     es-errors: ^1.3.0
     is-data-view: ^1.0.1
   checksum: 7f0bf8720b7414ca719eedf1846aeec392f2054d7af707c5dc9a753cc77eb8625f067fa901e0b5127e831f9da9056138d894b9c2be79c27a21f6db5824f009c2
+  languageName: node
+  linkType: hard
+
+"date-fns@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "date-fns@npm:4.1.0"
+  checksum: fb681b242cccabed45494468f64282a7d375ea970e0adbcc5dcc92dcb7aba49b2081c2c9739d41bf71ce89ed68dd73bebfe06ca35129490704775d091895710b
   languageName: node
   linkType: hard
 
@@ -7002,6 +7011,22 @@ next-auth@beta:
   dependencies:
     is-wsl: ^1.1.0
   checksum: e5037facf3e03ed777537db3e2511ada37f351c4394e1dadccf9cac11d63b28447ae8b495b7b138659910fd78d918bafed546e47163673c4a4e43dbb5ac53c5d
+  languageName: node
+  linkType: hard
+
+"openapi-fetch@npm:^0.12.2":
+  version: 0.12.2
+  resolution: "openapi-fetch@npm:0.12.2"
+  dependencies:
+    openapi-typescript-helpers: ^0.0.13
+  checksum: 42e8dd48407fd1a572768f79d0226cd4fdfead3732f44808cbb995144e97388ceeb310e83160fd27bd89eb39d2515bd8ddf32e33e5cb53fb50abaa748c08421e
+  languageName: node
+  linkType: hard
+
+"openapi-typescript-helpers@npm:^0.0.13":
+  version: 0.0.13
+  resolution: "openapi-typescript-helpers@npm:0.0.13"
+  checksum: d3cbc264378709a3f44fffbfb109e147aa078431c2ccbc6a4a130b60ae5a60131d9e73d43c7569eeaefd2a33b850d794184c8224a383795a67bf8e519c5766f1
   languageName: node
   linkType: hard
 
