@@ -12,6 +12,11 @@ const MainTitle = styled.h1`
   font-size: 48px;
   font-weight: 900;
   white-space: pre-line; /* This allows newline support */
+
+  @media (max-width: 960px) {
+    font-size: 32px;
+    white-space: normal;
+  }
 `
 
 const StyledParagraph = styled.p`
@@ -53,14 +58,44 @@ const ScrollContainer = styled.div`
   overflow-x: auto; // Enable horizontal scrolling
   scrollbar-width: none; // Hide scrollbar for Firefox
   -ms-overflow-style: none; // Hide scrollbar for Internet Explorer and Edge
+  padding: 16px;
+
+  @media (max-width: 960px) {
+    margin-top: 22px;
+  }
+`
+
+const Wrapper = styled.div`
+  flex: 1;
+`
+
+const Top = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  padding: 16px;
+
+  @media (max-width: 960px) {
+    flex-direction: column-reverse;
+  }
+`
+
+const TopImage = styled(Image)`
+  border-radius: 8px;
+
+  @media (max-width: 960px) {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
 `
 
 export default function Home() {
   const { data, isLoading } = useGetBilletsConcertQuery()
 
   return (
-    <div style={{ flex: 1 }}>
-      <div style={{ display: 'flex', flexDirection: 'row', gap: 24 }}>
+    <Wrapper>
+      <Top>
         <div style={{ flex: 1 }}>
           <MainTitle>Billets</MainTitle>
           <MainTitle>{'예정된\n많은 공연을\n놓치지 마세요 🎉'}</MainTitle>
@@ -73,17 +108,14 @@ export default function Home() {
           </Link>
         </div>
         <div style={{ flex: 1, borderRadius: 8 }}>
-          <Image
+          <TopImage
             src="/live-party.webp"
             alt="live-party"
             width={500}
             height={500}
-            style={{
-              borderRadius: 8,
-            }}
           />
         </div>
-      </div>
+      </Top>
       <ScrollContainer>
         {isLoading ? (
           <div style={{ display: 'flex', flexDirection: 'row', gap: 16 }}>
@@ -95,27 +127,29 @@ export default function Home() {
             ))}
           </div>
         ) : (
-          data?.data?.map((value) => (
-            <BilletsConcertCard key={value.id} isLoading={isLoading}>
-              <Image
-                src={value.posters[0].imageUrl}
-                alt="concert"
-                width={180}
-                height={180}
-                style={{
-                  borderRadius: 8,
-                  objectFit: 'cover',
-                }}
-              />
-              <StyledParagraph>{value.title}</StyledParagraph>
-              <StyledParagraph>
-                {format(parseISO(value.date), 'yyyy.MM.dd')}
-              </StyledParagraph>
-              <StyledParagraph>{value.venues[0].venueTitle}</StyledParagraph>
-            </BilletsConcertCard>
-          ))
+          <div style={{ display: 'flex', flexDirection: 'row', gap: 16 }}>
+            {data?.data?.map((value) => (
+              <BilletsConcertCard key={value.id} isLoading={isLoading}>
+                <Image
+                  src={value.posters[0].imageUrl}
+                  alt="concert"
+                  width={180}
+                  height={180}
+                  style={{
+                    borderRadius: 8,
+                    objectFit: 'cover',
+                  }}
+                />
+                <StyledParagraph>{value.title}</StyledParagraph>
+                <StyledParagraph>
+                  {format(parseISO(value.date), 'yyyy.MM.dd')}
+                </StyledParagraph>
+                <StyledParagraph>{value.venues[0].venueTitle}</StyledParagraph>
+              </BilletsConcertCard>
+            ))}
+          </div>
         )}
       </ScrollContainer>
-    </div>
+    </Wrapper>
   )
 }

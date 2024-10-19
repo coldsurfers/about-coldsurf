@@ -29,11 +29,20 @@ const HeaderContainer = styled.div<{ $animation: 'show' | 'hide' }>`
 const HeaderTitle = styled.h1`
   font-size: 32px;
   font-weight: 900;
+
+  @media (max-width: 960px) {
+    font-size: 24px;
+  }
 `
 
 const HeaderLogo = styled(Image)`
   border-radius: 50%;
   margin-right: 10px;
+
+  @media (max-width: 960px) {
+    width: 32px;
+    height: 32px;
+  }
 `
 
 const HeaderMenuContainer = styled(Link)`
@@ -46,9 +55,108 @@ const HeaderMenuContainer = styled(Link)`
 
 const HeaderMenuText = styled.p``
 
+const WebMenuContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  @media (max-width: 960px) {
+    display: none;
+  }
+`
+
+const MobileMenuContainer = styled.div`
+  display: none;
+
+  @media (max-width: 960px) {
+    display: flex;
+  }
+`
+
+const ModalContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`
+
+// const DimmedBackground = styled.div`
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   background-color: rgba(0, 0, 0, 0.5);
+//   z-index: 999; // Ensure it is below the modal
+// `
+
+const ModalPaper = styled.div`
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+`
+
+// const ModalHeader = styled.h2`
+//   margin: 0;
+//   font-size: 24px;
+//   font-weight: 600;
+// `
+
+const ModalContent = styled.div`
+  margin: 10px 0;
+`
+
+const ModalFooter = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`
+
+export function ModalMenu({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean
+  onClose: () => void
+}) {
+  if (!isOpen) return null
+
+  return (
+    <ModalContainer>
+      <ModalPaper>
+        {/* <ModalHeader>Menu</ModalHeader> */}
+        <ModalContent>
+          <Link href="/about" onClick={onClose}>
+            <p>About</p>
+          </Link>
+          <Link href="/blog" onClick={onClose}>
+            <p>Blog</p>
+          </Link>
+          <Link href={BILLETS_APP_URL} onClick={onClose}>
+            <Button text="Get Billets app" color="pink" />
+          </Link>
+        </ModalContent>
+        <ModalFooter>
+          <Button text="Close" color="transparent" onPress={onClose} />
+        </ModalFooter>
+      </ModalPaper>
+    </ModalContainer>
+  )
+}
+
 export default function Header() {
   const [animation, setAnimation] = useState<'show' | 'hide'>('show')
-
+  const [isModalOpen, setIsModalOpen] = useState(false)
   useEffect(() => {
     let lastScrollTop = 0
     const onScroll = () => {
@@ -69,29 +177,41 @@ export default function Header() {
   }, [])
 
   return (
-    <HeaderContainer $animation={animation}>
-      <div style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
-        <Link href="/">
-          <HeaderLogo
-            src="/coldsurf.webp"
-            alt="coldsurf"
-            width={48}
-            height={48}
+    <>
+      <HeaderContainer $animation={animation}>
+        <div style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
+          <Link href="/">
+            <HeaderLogo
+              src="/coldsurf.webp"
+              alt="coldsurf"
+              width={48}
+              height={48}
+            />
+          </Link>
+          <Link href="/">
+            <HeaderTitle>COLDSURF</HeaderTitle>
+          </Link>
+        </div>
+        <WebMenuContainer>
+          <HeaderMenuContainer href="/about">
+            <HeaderMenuText>About</HeaderMenuText>
+          </HeaderMenuContainer>
+          <HeaderMenuContainer href="/blog">
+            <HeaderMenuText>Blog</HeaderMenuText>
+          </HeaderMenuContainer>
+          <Link href={BILLETS_APP_URL}>
+            <Button text="Get Billets app" color="pink" />
+          </Link>
+        </WebMenuContainer>
+        <MobileMenuContainer>
+          <Button
+            text="🍔"
+            color="transparentDarkGray"
+            onPress={() => setIsModalOpen(true)}
           />
-        </Link>
-        <Link href="/">
-          <HeaderTitle>COLDSURF</HeaderTitle>
-        </Link>
-      </div>
-      <HeaderMenuContainer href="/about">
-        <HeaderMenuText>About</HeaderMenuText>
-      </HeaderMenuContainer>
-      <HeaderMenuContainer href="/blog">
-        <HeaderMenuText>Blog</HeaderMenuText>
-      </HeaderMenuContainer>
-      <Link href={BILLETS_APP_URL}>
-        <Button text="Get Billets app" color="pink" />
-      </Link>
-    </HeaderContainer>
+        </MobileMenuContainer>
+      </HeaderContainer>
+      <ModalMenu isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </>
   )
 }
