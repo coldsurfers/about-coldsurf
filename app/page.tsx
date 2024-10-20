@@ -29,17 +29,18 @@ const StyledParagraph = styled.p`
   margin-bottom: 0;
 `
 
-const BilletsConcertCard = styled.div<{ isLoading: boolean }>`
+const BilletsConcertCard = styled.div<{ $isLoading: boolean }>`
   width: 180px;
-  height: ${(props) => (props.isLoading ? '180px' : '240px')};
+  height: ${(props) => (props.$isLoading ? '180px' : '240px')};
   border-radius: 8px;
   overflow: hidden;
   background: ${(props) =>
-    props.isLoading
+    props.$isLoading
       ? 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)'
       : 'none'};
   background-size: 200% 100%;
-  animation: ${(props) => (props.isLoading ? 'loading 1.5s infinite' : 'none')};
+  animation: ${(props) =>
+    props.$isLoading ? 'loading 1.5s infinite' : 'none'};
 
   @keyframes loading {
     0% {
@@ -132,10 +133,14 @@ export default function Home() {
   return (
     <Wrapper>
       <Top>
-        <div style={{ flex: 1 }}>
+        <div
+          style={{
+            flex: 1,
+          }}
+        >
           <MainTitle>Billets</MainTitle>
           <MainTitle>{'예정된\n많은 공연을\n놓치지 마세요 🎉'}</MainTitle>
-          <Link href={BILLETS_APP_URL}>
+          <Link href={BILLETS_APP_URL} style={{ display: 'inline-block' }}>
             <Button
               text="Get Billets app"
               color="pink"
@@ -162,13 +167,13 @@ export default function Home() {
               index,
               id: index,
             })).map((value) => (
-              <BilletsConcertCard key={value.id} isLoading={isLoading} />
+              <BilletsConcertCard key={value.id} $isLoading={isLoading} />
             ))}
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'row', gap: 16 }}>
             {data?.data?.map((value) => (
-              <BilletsConcertCard key={value.id} isLoading={isLoading}>
+              <BilletsConcertCard key={value.id} $isLoading={isLoading}>
                 <Image
                   src={value.posters[0].imageUrl}
                   alt="concert"
