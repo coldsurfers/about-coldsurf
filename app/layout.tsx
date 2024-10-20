@@ -11,7 +11,7 @@ import { AuthStoreProvider } from '../registry/AuthStoreRegistry/AuthStoreRegist
 import RegistryProvider from '../registry/RegistryProvider'
 import { COOKIES } from '../libs/constants'
 
-const inter = notoSans({ subsets: ['latin'] })
+const notoSansFont = notoSans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: '예정된 많은 공연을 놓치지 마세요 🎉 | COLDSURF',
@@ -28,7 +28,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head></head>
-      <body className={[inter.className, 'bg-gray-50'].join(' ')}>
+      <body className={[notoSansFont.className].join(' ')}>
         <RegistryProvider
           registries={[StyledComponentsRegistry, StyleSheetRegistry]}
         >

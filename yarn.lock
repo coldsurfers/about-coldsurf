@@ -1075,7 +1075,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@coldsurfers/about-coldsurf@workspace:."
   dependencies:
-    "@coldsurfers/hotsurf": 0.3.0
+    "@coldsurfers/hotsurf": 0.3.6
     "@coldsurfers/ocean-road": 1.5.1-rc.4
     "@react-oauth/google": ^0.12.1
     "@tanstack/eslint-plugin-query": ^5.12.1
@@ -1130,9 +1130,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@coldsurfers/hotsurf@npm:0.3.0":
-  version: 0.3.0
-  resolution: "@coldsurfers/hotsurf@npm:0.3.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40coldsurfers%2Fhotsurf%2F0.3.0%2F7fed26b89ddfb989a5691ed575338d31176b1704"
+"@coldsurfers/hotsurf@npm:0.3.6":
+  version: 0.3.6
+  resolution: "@coldsurfers/hotsurf@npm:0.3.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40coldsurfers%2Fhotsurf%2F0.3.6%2Fa333bc71f3e256337e941c49eb48370cf616175a"
   dependencies:
     react: 18.2.0
     style-dictionary: ^3.7.1
@@ -1140,7 +1140,7 @@ __metadata:
   peerDependencies:
     react: ">= 18.2.0"
     react-native: ">= 0.69.0"
-  checksum: adfe5c521d8462ed4a5d7252c3d3e3ac65a93e3bd746172f1d38aa3bf20a17a1f09047e4232ea1bafd53b9a278b8091f9212f376ee713df3fc7b915b5edb79da
+  checksum: 6717cefa0458a370536e2ecd04d8632c687976d170361ca21cbec69849618937d47f4f0558a9cb8b89993cd788f0d5ac6d74fce8637c117ccedb3ff49ab40eec
   languageName: node
   linkType: hard
 

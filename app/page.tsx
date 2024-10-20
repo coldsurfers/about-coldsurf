@@ -31,7 +31,7 @@ const StyledParagraph = styled.p`
 
 const BilletsConcertCard = styled.div<{ $isLoading: boolean }>`
   width: 180px;
-  height: ${(props) => (props.$isLoading ? '180px' : '240px')};
+  height: ${(props) => (props.$isLoading ? '180px' : '260px')};
   border-radius: 8px;
   overflow: hidden;
   background: ${(props) =>
