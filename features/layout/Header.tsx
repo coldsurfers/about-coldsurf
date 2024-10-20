@@ -117,10 +117,10 @@ export function ModalMenu({
     if (isOpen) {
       body.style.overflow = 'hidden' // Disable scrolling
     } else {
-      body.style.overflow = 'auto' // Reset overflow to enable scrolling
+      body.style.overflow = '' // Reset overflow to enable scrolling
     }
     return () => {
-      body.style.overflow = 'auto' // Clean up on unmount
+      body.style.overflow = '' // Clean up on unmount
     }
   }, [isOpen])
 

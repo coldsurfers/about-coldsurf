@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { format, parseISO } from 'date-fns'
+import { WheelEventHandler } from 'react'
 import { BILLETS_APP_URL } from '../features/billets/billets.constants'
 import { useGetBilletsConcertQuery } from '../features/billets/billets.hooks'
 
@@ -59,6 +60,7 @@ const ScrollContainer = styled.div`
   scrollbar-width: none; // Hide scrollbar for Firefox
   -ms-overflow-style: none; // Hide scrollbar for Internet Explorer and Edge
   padding: 16px;
+  scroll-snap-type: x mandatory;
 
   @media (max-width: 960px) {
     margin-top: 22px;
@@ -92,6 +94,40 @@ const TopImage = styled(Image)`
 
 export default function Home() {
   const { data, isLoading } = useGetBilletsConcertQuery()
+  const handleWheelScroll: WheelEventHandler<HTMLDivElement> = (event) => {
+    // event.preventDefault()
+    const scrollAmount = event.deltaY
+    const container = event.currentTarget as HTMLElement
+    container.scrollBy({
+      left: scrollAmount,
+      behavior: 'instant',
+    })
+  }
+
+  const handleDragScroll = (event: React.MouseEvent) => {
+    const container = event.currentTarget as HTMLElement
+    const startX = event.clientX
+    const { scrollLeft } = container
+
+    const onMouseMove = (moveEvent: MouseEvent) => {
+      const x = moveEvent.clientX - startX
+      container.scrollLeft = scrollLeft - x
+    }
+
+    const onMouseUp = () => {
+      container.removeEventListener('mousemove', onMouseMove)
+      container.removeEventListener('mouseup', onMouseUp)
+    }
+
+    const onMouseLeave = () => {
+      container.removeEventListener('mousemove', onMouseMove)
+      container.removeEventListener('mouseup', onMouseUp)
+    }
+
+    container.addEventListener('mousemove', onMouseMove)
+    container.addEventListener('mouseup', onMouseUp)
+    container.addEventListener('mouseleave', onMouseLeave)
+  }
 
   return (
     <Wrapper>
@@ -116,7 +152,10 @@ export default function Home() {
           />
         </div>
       </Top>
-      <ScrollContainer>
+      <ScrollContainer
+        onWheel={handleWheelScroll}
+        onMouseDown={handleDragScroll}
+      >
         {isLoading ? (
           <div style={{ display: 'flex', flexDirection: 'row', gap: 16 }}>
             {Array.from({ length: 10 }, (_, index) => ({
@@ -139,6 +178,7 @@ export default function Home() {
                     borderRadius: 8,
                     objectFit: 'cover',
                   }}
+                  onMouseDown={(e) => e.preventDefault()}
                 />
                 <StyledParagraph>{value.title}</StyledParagraph>
                 <StyledParagraph>
